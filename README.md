@@ -1,8 +1,6 @@
 # Sankalan
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/sankalan`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem is an attempt to make calls to dtrace and mdb interchangeably without using multiple tabs.
 
 ## Installation
 
@@ -14,15 +12,59 @@ gem 'sankalan'
 
 And then execute:
 
+    ```ruby
     $ bundle
+    ```
 
 Or install it yourself as:
 
+    ```ruby
     $ gem install sankalan
+    ```
+
+For testing and development, follow the instructions in the development section, simply clone this code, and run bin/console after running bundle install.
+
 
 ## Usage
 
-TODO: Write usage instructions here
+- Creating the sankalan object . 
+```ruby
+s = Sankalan::Sankalan.new
+```
+
+- Getting the process object from the variable, 
+```ruby
+p = s.find_method "pulseaudio"
+```
+
+- Calling dtrace on it. 
+```ruby
+p.dtrace "","","","",true
+```
+The fifth parameter would stop the process if required, when the probe is hit. It is default to false
+
+- Testing permission
+```ruby
+s.test
+```
+It would quit if you don't have adequate permissions.
+
+- Pausing and running the processes
+```ruby
+p.pause
+p.restart
+```
+- Walk a process
+```ruby
+p.walk
+```
+It would display all the required methods in a process
+
+- File object of a  process
+```ruby
+f = p.find_file
+f.walk
+```
 
 ## Development
 
@@ -32,7 +74,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/sankalan. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/prashantbarca/sankalan. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License

@@ -1,0 +1,5 @@
+#!/home/prashant/.rbenv/versions/2.3.0/bin/ruby
+
+require 'sankalan'
+
+a = Sankalan::Sankalan.new.test
